@@ -11,4 +11,9 @@ type TProjects = {
 
 type TProjectsRequest = Omit<TProjects, "id">
 
-export { TProjects, TProjectsRequest };
+interface TProjectsAndTechnologies  extends TProjects {
+  technologiesid: number;
+  technologiesname: string;
+}
+
+export { TProjects, TProjectsRequest, TProjectsAndTechnologies };
