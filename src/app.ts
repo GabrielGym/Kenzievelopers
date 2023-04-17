@@ -12,7 +12,7 @@ app.post("/developers",ensureDeveloperEmailExists, createDeveloper)
 app.patch("/developers/:id", ensureDeveloperIdExists, ensureDeveloperEmailExists, updateDeveloper)
 app.delete("/developers/:id", ensureDeveloperIdExists, deleteDeveloper)
 app.post("/developers/:id/infos", ensureDeveloperIdExists, ensureDeveloperInfosExists, createDeveloperInfos)
-app.get("/developers/:id", ensureDeveloperIdExists, getDeveloperAndInfos )
+app.get("/developers/:id",ensureDeveloperIdExists, getDeveloperAndInfos )
 
 app.post("/projects",ensureDeveloperIdExistsProjects, createProject)
 app.patch("/projects/:id", ensureDeveloperIdExistsProjects, ensureProjectIdExists, updateproject)

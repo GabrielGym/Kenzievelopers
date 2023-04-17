@@ -88,7 +88,6 @@ const deleteDeveloper = async (
   return res.status(204).send();
 };
 
-// createDeveloperInfos incompleta tem que rever a logica //
 const createDeveloperInfos = async (
   req: Request,
   res: Response
@@ -146,10 +145,12 @@ const getDeveloperAndInfos = async (
         di."preferredOS" as "developerInfoPreferredOS"
     FROM
         developers AS d
-    JOIN 
+    INNER JOIN 
         developer_infos AS di
     ON 
-        d."id" = $1
+       di."developerId" = d."id"
+    WHERE
+        di."developerId" = $1
   `;
 
   const queryConfig: QueryConfig = {
@@ -159,7 +160,7 @@ const getDeveloperAndInfos = async (
 
   const queryResult: QueryResult<TDeveloperAndInfos> = await client.query(
     queryConfig
-  );
+  ); 
 
   return res.status(200).json(queryResult.rows[0]);
 };
