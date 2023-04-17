@@ -1,8 +1,6 @@
 import app from "./app";
 import { startDatabase } from "./database";
 
-const appPort = process.env.APP_PORT || 3000 ;
-
 const server = (port: number) =>
   app.listen(port, async () => {
     await startDatabase();
@@ -10,7 +8,7 @@ const server = (port: number) =>
   });
 
 if (process.env.NODE_ENV === "dev") {
-  server(appPort);
+  server(Number(process.env.APP_PORT));
 }
 
 export default server;
