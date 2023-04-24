@@ -138,19 +138,19 @@ const getDeveloperAndInfos = async (
 
   const queryString: string = `
     SELECT 
-        d."id" as "developerId", 
-        d."name" as "developerName", 
-        d."email" "developerEmail", 
-        di."developerSince" as "developerInfoDeveloperSince", 
-        di."preferredOS" as "developerInfoPreferredOS"
+        "d"."id" as "developerId", 
+        "d"."name" as "developerName", 
+        "d"."email" "developerEmail", 
+        "di"."developerSince" as "developerInfoDeveloperSince", 
+        "di"."preferredOS" as "developerInfoPreferredOS"
     FROM
         developers AS d
-    INNER JOIN 
+    FULL OUTER JOIN 
         developer_infos AS di
     ON 
        di."developerId" = d."id"
     WHERE
-        di."developerId" = $1
+        "d"."id" = $1
   `;
 
   const queryConfig: QueryConfig = {

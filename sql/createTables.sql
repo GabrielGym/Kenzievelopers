@@ -1,4 +1,5 @@
-
+/* CREATE TYPE type_os AS ENUM ('Windows', 'Linux', 'MacOS');
+ */
 CREATE TABLE IF NOT EXISTS developers (
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR(50) NOT NULL,
@@ -8,9 +9,9 @@ CREATE TABLE IF NOT EXISTS developers (
 CREATE TABLE IF NOT EXISTS developer_infos (
 	"id" SERIAL PRIMARY KEY,
 	"developerSince" DATE NOT NULL,
-	"preferredOS" type_preferred_os NOT NULL,
+	"preferredOS" type_os NOT NULL,
 	"developerId" INTEGER UNIQUE NOT NULL,
-	FOREIGN KEY ("developerId") REFERENCES "developers" ("id") ON DELETE CASCADE 
+	FOREIGN KEY ("developerId") REFERENCES "developers" ("id") ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS projects (
@@ -22,7 +23,9 @@ CREATE TABLE IF NOT EXISTS projects (
 	"startDate" DATE NOT NULL,
 	"endDate" DATE,
 	"developerId" INTEGER,
-	FOREIGN KEY ("developerId") REFERENCES "developers" ("id") ON DELETE SET NULL 
+	FOREIGN KEY ("developerId") REFERENCES "developers" ("id") ON DELETE
+	SET
+		NULL
 );
 
 CREATE TABLE IF NOT EXISTS technologies (
@@ -30,11 +33,24 @@ CREATE TABLE IF NOT EXISTS technologies (
 	"name" VARCHAR(30) NOT NULL
 );
 
+INSERT INTO
+	technologies ("name")
+VALUES
+	('JavaScript'),
+	('Python'),
+	('React'),
+	('Express.js'),
+	('HTML'),
+	('CSS'),
+	('Django'),
+	('PostgreSQL'),
+	('MongoDB');
+
 CREATE TABLE IF NOT EXISTS projects_technologies (
 	"id" SERIAL PRIMARY KEY,
 	"addedIn" DATE NOT NULL,
 	"technologyId" INTEGER NOT NULL,
 	"projectId" INTEGER NOT NULL,
-	FOREIGN KEY ("technologyId") REFERENCES "technologies" ("id") ON DELETE CASCADE ,
-	FOREIGN KEY ("projectId") REFERENCES "projects" ("id") ON DELETE CASCADE 
+	FOREIGN KEY ("technologyId") REFERENCES "technologies" ("id") ON DELETE CASCADE,
+	FOREIGN KEY ("projectId") REFERENCES "projects" ("id") ON DELETE CASCADE
 );
