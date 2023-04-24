@@ -1,5 +1,5 @@
-/* CREATE TYPE type_os AS ENUM ('Windows', 'Linux', 'MacOS');
- */
+CREATE TYPE  type_os AS ENUM ('Windows', 'Linux', 'MacOS');
+
 CREATE TABLE IF NOT EXISTS developers (
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR(50) NOT NULL,

@@ -16,4 +16,8 @@ interface TProjectsAndTechnologies  extends TProjects {
   technologiesname: string;
 }
 
-export { TProjects, TProjectsRequest, TProjectsAndTechnologies };
+type technologiesRequest = {
+  name: string;
+};
+
+export { TProjects, TProjectsRequest, TProjectsAndTechnologies, technologiesRequest };

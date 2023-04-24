@@ -1,10 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { QueryConfig, QueryResult } from "pg";
 import { client } from "../database";
-
-type technologiesRequest = {
-  name: string;
-};
+import { technologiesRequest } from "../Interfaces/projects";
 
 const verifyNameTechnologies = async (
   req: Request,
@@ -30,7 +27,7 @@ const verifyNameTechnologies = async (
   const queryResult: QueryResult = await client.query(queryConfig);
 
   if (queryResult.rowCount === 0) {
-    return res.status(409).json({
+    return res.status(400).json({
       message: "Technology not supported.",
       options: [
         "JavaScript",
@@ -46,7 +43,9 @@ const verifyNameTechnologies = async (
     });
   }
 
+  res.locals.technologyId = queryResult.rows[0].id;
+
   return next();
 };
 
-export { verifyNameTechnologies }
+export { verifyNameTechnologies };
